@@ -53,34 +53,34 @@ void GameView::render()
 
     ImGui::PushTextWrapPos(_image_fetcher.get_texture() == nullptr ?
         0.f : GameViewWidth - 300.f);
-    ImGui::Text(fmt::format("Firmware version: {}", pkgi_get_system_version())
+    ImGui::Text(fmt::format("Версия ПО: {}", pkgi_get_system_version())
                         .c_str());
     ImGui::Text(
             fmt::format(
-                    "Required firmware version: {}", get_min_system_version())
+                    "Требуемая версия ПО: {}", get_min_system_version())
                     .c_str());
 
     ImGui::Text(" ");
 
     ImGui::Text(fmt::format(
-                        "Installed game version: {}",
-                        _game_version.empty() ? "not installed" : _game_version)
+                        "Установленная версия игры: {}",
+                        _game_version.empty() ? "Не установлен" : _game_version)
                         .c_str());
     if (_comppack_versions.present && _comppack_versions.base.empty() &&
         _comppack_versions.patch.empty())
     {
-        ImGui::Text("Installed compatibility pack: unknown version");
+        ImGui::Text("Установленый пакет совместимости: Неизвестная версия");
     }
     else
     {
         ImGui::Text(fmt::format(
-                            "Installed base compatibility pack: {}",
-                            _comppack_versions.base.empty() ? "no" : "yes")
+                            "Установленный базовый пакет совместимости: {}",
+                            _comppack_versions.base.empty() ? "Нет" : "Да")
                             .c_str());
         ImGui::Text(fmt::format(
-                            "Installed patch compatibility pack version: {}",
+                            "Установленная версия пакета совместимости с патчами: {}",
                             _comppack_versions.patch.empty()
-                                    ? "none"
+                                    ? "нету"
                                     : _comppack_versions.patch)
                             .c_str());
     }
@@ -95,12 +95,12 @@ void GameView::render()
 
     if (_patch_info_fetcher.get_status() == PatchInfoFetcher::Status::Found)
     {
-        if (ImGui::Button("Install game and patch###installgame"))
+        if (ImGui::Button("Установить игру и патч###installgame"))
             start_download_package();
     }
     else
     {
-        if (ImGui::Button("Install game###installgame"))
+        if (ImGui::Button("Установить игру###installgame"))
             start_download_package();
     }
 
@@ -108,13 +108,13 @@ void GameView::render()
     {
         if (!_downloader->is_in_queue(CompPackBase, _item->titleid))
         {
-            if (ImGui::Button("Install base compatibility "
+            if (ImGui::Button("Установить базовый пакет совместимости"
                               "pack###installbasecomppack"))
                 start_download_comppack(false);
         }
         else
         {
-            if (ImGui::Button("Cancel base compatibility pack "
+            if (ImGui::Button("Отменить установку базового пакета совместимости"
                               "installation###installbasecomppack"))
                 cancel_download_comppacks(false);
         }
