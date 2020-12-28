@@ -176,20 +176,20 @@ void GameView::printDiagnostic()
         {
             if (_refood_present)
                 ImGui::Text(
-                        "- This game will work thanks to reF00D");
+                        "- Эта игра будет работать благодаря reF00D");
             else if (_0syscall6_present)
                 ImGui::Text(
-                        "- This game will work thanks to 0syscall6");
+                        "- Эта игра будет работать благодаря 0syscall6");
             else
                 printError(
-                        "- Your firmware is too old to play this game, you "
-                        "must install reF00D or 0syscall6");
+                        "- Ваша версия ПО слишком стара, чтобы играть в эту игру, вы... "
+                        "нужно установить reF00D или 0syscall6");
         }
     }
     else
     {
         ImGui::Text(
-                "- Your firmware is recent enough");
+                "- Ваша версия ПО достаточно свежая.");
     }
 
     if (_comppack_versions.present && _comppack_versions.base.empty() &&
@@ -197,17 +197,17 @@ void GameView::printDiagnostic()
     {
         ImGui::TextColored(
                 Yellow,
-                "- A compatibility pack is installed but not by PKGj, please "
-                "make sure it matches the installed version or reinstall it "
-                "with PKGj");
+                "- Пакет совместимости установлен, но не с помощью PKGj, пожалуйста. "
+                "убедитесь, что она совпадает с установленной версией или переустановите ее. "
+                "с помощью PKGj");
         ok = false;
     }
 
     if (_comppack_versions.base.empty() && !_comppack_versions.patch.empty())
         printError(
-                "- You have installed an update compatibility pack without "
-                "installing the base pack, install the base pack first and "
-                "reinstall the update compatibility pack.");
+                "- Вы установили пакет обновления совместимости без "
+                "установки базовый пакет, сначала установите базовый пакет, и "
+                "переустановите  обновление пакета совместимости.");
 
     std::string comppack_version;
     if (!_comppack_versions.patch.empty())
@@ -231,7 +231,7 @@ void GameView::printDiagnostic()
 
     if (_item->presence != PresenceInstalled)
     {
-        ImGui::Text("- Game not installed");
+        ImGui::Text("- Игра не установлена");
         ok = false;
     }
 
@@ -262,7 +262,7 @@ void GameView::start_download_package()
     if (_item->presence == PresenceInstalled)
     {
         LOGF("[{}] {} - already installed", _item->titleid, _item->name);
-        pkgi_dialog_error("Already installed");
+        pkgi_dialog_error("Уже установлено");
         return;
     }
 
